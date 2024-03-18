@@ -6,6 +6,7 @@ import DashPosts from '../components/DashPosts';
 import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
 import DashboardComp from '../components/DashboardComp';
+import FileUpload from '../components/FileUpload';
 
 export default function Dashboard() {
   const location = useLocation();
@@ -44,6 +45,10 @@ export default function Dashboard() {
       {/* Comments */}
       {
         tab=== 'comments' && <DashComments/>
+      }
+      {/* Comments */}
+      {
+        tab=== 'schedule' && <FileUpload/>
       }
       {/* Dashborad Component */}
       {

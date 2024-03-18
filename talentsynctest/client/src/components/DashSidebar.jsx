@@ -6,10 +6,12 @@ import {
   HiOutlineUserGroup,
   HiAnnotation,
   HiChartPie,
+  HiChartBar,
 } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { signoutSuccess } from '../redux/user/userSlice';
+import { AiOutlineSchedule } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -95,6 +97,15 @@ export default function DashSidebar() {
                   as='div'
                 >
                   Comments
+                </Sidebar.Item>
+              </Link>
+              <Link to='/dashboard?tab=schedule'>
+                <Sidebar.Item
+                  active={tab === 'schedule'}
+                  icon={HiChartBar}
+                  as='div'
+                >
+                  Schedule
                 </Sidebar.Item>
               </Link>
             </>
