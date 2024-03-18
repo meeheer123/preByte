@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Interviews</title>
+</head>
+<body>
+    <h2>Preferred Time Slots</h2>
+    <form id="timeSlotForm">
+        <label for="startTime">Start Time:</label>
+        <input type="time" id="startTime" name="startTime" required><br><br>
+
+        <label for="endTime">End Time:</label>
+        <input type="time" id="endTime" name="endTime" required><br><br>
+
+        <label for="interviewDuration">Interview Duration (hours):</label>
+        <input type="number" id="interviewDuration" name="interviewDuration" min="1" value="2" required><br><br>
+
+        <label for="breakDuration">Break Duration (minutes):</label>
+        <input type="number" id="breakDuration" name="breakDuration" min="0" value="30" required><br><br>
+
+        <button type="button" onclick="scheduleInterviews()">Schedule Interviews</button>
+    </form>
+
+    <div id="scheduledInterviews"></div>
+
+    <script>
+function scheduleInterviews() {
+    // Get input values
+    var startTime = document.getElementById('startTime').value;
+    var endTime = document.getElementById('endTime').value;
+    var interviewDuration = parseInt(document.getElementById('interviewDuration').value);
+    var breakDuration = parseInt(document.getElementById('breakDuration').value);
+
+    // Convert start time and end time to Date objects
+    var startDate = new Date();
+    var endDate = new Date();
+    startDate.setHours(parseInt(startTime.split(':')[0]), parseInt(startTime.split(':')[1]), 0, 0);
+    endDate.setHours(parseInt(endTime.split(':')[0]), parseInt(endTime.split(':')[1]), 0, 0);
+
+    // Schedule interviews
+    var scheduledInterviews = [];
+    var currentDate = new Date(startDate);
+    while (currentDate < endDate) {
+        // Calculate interview end time
+        var endDateTime = new Date(currentDate.getTime() + interviewDuration * 60 * 1000);
+
+        // Round end time to the nearest minute
+        endDateTime.setSeconds(0,0);
+
+        // Add scheduled interview to the list
+        scheduledInterviews.push({
+            'date': currentDate.toDateString(),
+            'start_time': formatTime(currentDate),
+            'end_time': formatTime(endDateTime)
+        });
+
+        // Move to the next available slot
+        currentDate = new Date(currentDate.getTime() + (interviewDuration + breakDuration) * 60 * 1000);
+    }
+
+    // Display scheduled interviews
+    var scheduledInterviewsDiv = document.getElementById('scheduledInterviews');
+    scheduledInterviewsDiv.innerHTML = '<h2>Scheduled Interviews</h2>';
+    scheduledInterviews.forEach(interview => {
+        scheduledInterviewsDiv.innerHTML += '<p>' + JSON.stringify(interview) + '</p>';
+    });
+}
+    </script>
+</body>
+</html>

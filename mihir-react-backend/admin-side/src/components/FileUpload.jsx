@@ -1,29 +1,23 @@
+// CSVReader.js
 import React, { useState } from 'react';
 import Papa from 'papaparse';
 
-const CSVReader = ({ onProcessData }) => {
+const CSVReader = () => {
   const [csvData, setCsvData] = useState([]);
 
   const handleFileChange = (event) => {
-    const files = event.target.files;
-    const combinedData = [];
-
-    Array.from(files).forEach((file) => {
-      Papa.parse(file, {
-        complete: (result) => {
-          combinedData.push(...result.data);
-          setCsvData([...combinedData]);
-          // Process data and pass it to the parent component
-          onProcessData(combinedData);
-        },
-        header: true, // Set to true if your CSV has headers
-      });
+    const file = event.target.files[0];
+    Papa.parse(file, {
+      complete: (result) => {
+        setCsvData(result.data);
+      },
+      header: true, // Set to true if your CSV has headers
     });
   };
 
   return (
     <div>
-      <input type="file" accept=".csv" onChange={handleFileChange} multiple />
+      <input type="file" accept=".csv" onChange={handleFileChange} />
       <table>
         <thead>
           <tr>
