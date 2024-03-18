@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation , useNavigate } from 'react-router-dom'
 import DashProfile from '../components/DashProfile';
 import DashSidebar from '../components/DashSidebar';
 import DashPosts from '../components/DashPosts';
@@ -7,6 +7,7 @@ import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
 import DashboardComp from '../components/DashboardComp';
 import FileUpload from '../components/FileUpload';
+import SchedulerForm from './SchedulerPage';
 
 export default function Dashboard() {
   const location = useLocation();
@@ -46,10 +47,14 @@ export default function Dashboard() {
       {
         tab=== 'comments' && <DashComments/>
       }
-      {/* Comments */}
+      {/* schedule */}
       {
         tab=== 'schedule' && <FileUpload/>
       }
+      {/* schedule
+      {
+        tab=== 'schedulerpage' && <SchedulerForm/>
+      } */}
       {/* Dashborad Component */}
       {
         tab=== 'dash' && <DashboardComp/>
