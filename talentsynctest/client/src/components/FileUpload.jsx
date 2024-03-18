@@ -6,18 +6,23 @@ const CSVReader = () => {
   const [csvData, setCsvData] = useState([]);
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    Papa.parse(file, {
-      complete: (result) => {
-        setCsvData(result.data);
-      },
-      header: true, // Set to true if your CSV has headers
+    const files = event.target.files;
+    const combinedData = [];
+
+    Array.from(files).forEach((file) => {
+      Papa.parse(file, {
+        complete: (result) => {
+          combinedData.push(...result.data);
+          setCsvData([...combinedData]);
+        },
+        header: true, // Set to true if your CSV has headers
+      });
     });
   };
 
   return (
     <div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
+      <input type="file" accept=".csv" onChange={handleFileChange} multiple />
       <table>
         <thead>
           <tr>
