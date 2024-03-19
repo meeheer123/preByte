@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import scheduleInterviews from './scheduleInterviews'; // Import your scheduling function
+import axios from 'axios';
 
 const SchedulerForm = () => {
     const [startTime, setStartTime] = useState('');
@@ -8,21 +8,16 @@ const SchedulerForm = () => {
     const [interviewDuration, setInterviewDuration] = useState(2);
     const [breakDuration, setBreakDuration] = useState(30);
     const [scheduledInterviews, setScheduledInterviews] = useState([]);
+    const [csvData, setCsvData] = useState([]);
     const location = useLocation();
 
     useEffect(() => {
         if (location.state && location.state.csvData) {
             // Retrieve CSV data from location state
             const csvData = location.state.csvData;
-            // Process CSV data as needed
-            // console.log('CSV Data:', csvData);
-
-            // Call the scheduling function here
-            const scheduledData = scheduleInterviews(csvData, startTime, endTime, interviewDuration, breakDuration);
-            console.log('Scheduled Interviews:', scheduledData);
-            setScheduledInterviews(scheduledData);
+            setCsvData(csvData);
         }
-    }, [location.state, startTime, endTime, interviewDuration, breakDuration]);
+    }, [location.state]);
 
     // Function to handle scheduling interviews
     const handleScheduleInterviews = () => {
@@ -32,27 +27,33 @@ const SchedulerForm = () => {
         startDate.setHours(parseInt(startTime.split(':')[0]), parseInt(startTime.split(':')[1]), 0, 0);
         endDate.setHours(parseInt(endTime.split(':')[0]), parseInt(endTime.split(':')[1]), 0, 0);
 
-        // Schedule interviews
-        const interviews = [];
-        let currentDate = new Date(startDate);
-        while (currentDate < endDate) {
-            // Calculate interview end time
-            const endDateTime = new Date(currentDate.getTime() + interviewDuration * 60 * 1000);
-            endDateTime.setSeconds(0, 0);
+        console.log(csvData);
+    
+        // Prepare request body
+        const requestData = {
+            candidates: csvData, // Fill this with your candidates data
+            start_time: startTime,
+            end_time: endTime,
+            interview_duration: interviewDuration,
+            break_time: breakDuration
+        };
+    
+        // Make POST request to the API
+        const handleScheduleInterviews = async () => {
+            try {
+                const response = await axios.post('http://127.0.0.1:5000/schedule-interviews', requestData);
+                if (response.status !== 200) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = response.data;
+                setScheduledInterviews(data.scheduled_interviews);
+                console.log('Scheduled Interviews:', data.scheduled_interviews);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        };
 
-            // Add scheduled interview to the list
-            interviews.push({
-                date: currentDate.toDateString(),
-                start_time: formatTime(currentDate),
-                end_time: formatTime(endDateTime)
-            });
-
-            // Move to the next available slot
-            currentDate = new Date(currentDate.getTime() + (interviewDuration + breakDuration) * 60 * 1000);
-        }
-
-        // Update scheduled interviews state
-        setScheduledInterviews(interviews);
+        handleScheduleInterviews(); // Call the function to initiate the POST request
     };
 
     // Function to format time as HH:MM

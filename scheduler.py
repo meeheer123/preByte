@@ -1,7 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import datetime
 
 app = Flask(__name__)
+
+cors = CORS(app, resources={r"/schedule-interviews": {"origins": "http://localhost:5173"}})
+
+
 
 def schedule_interviews(candidate_data, start_time, end_time, interview_duration, break_time):
     current_date = datetime.date.today()
@@ -19,12 +24,20 @@ def schedule_interviews(candidate_data, start_time, end_time, interview_duration
             current_datetime += interview_duration + break_time
 
         while available_slots and candidate_data:
+            candidate = candidate_data.pop(0)
+            try:
+                name = candidate['name']
+                email = candidate['email']
+            except KeyError as e:
+                # Handle missing keys in the candidate data
+                app.logger.error(f"Missing key in candidate data: {e}")
+                continue
+
             start_datetime = available_slots.pop(0)
             end_datetime = start_datetime + interview_duration
-            candidate = candidate_data.pop(0)
             scheduled_interviews.append({
-                'name': candidate['name'],
-                'email': candidate['email'],
+                'name': name,
+                'email': email,
                 'date': current_date.strftime('%Y-%m-%d'),
                 'start_time': start_datetime.strftime('%H:%M'),
                 'end_time': end_datetime.strftime('%H:%M')
@@ -33,6 +46,7 @@ def schedule_interviews(candidate_data, start_time, end_time, interview_duration
         current_date += datetime.timedelta(days=1)
 
     return scheduled_interviews
+
 
 @app.route('/schedule-interviews', methods=['POST'])
 def schedule_interviews_api():
