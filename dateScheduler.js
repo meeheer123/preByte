@@ -66,4 +66,4 @@ let breakDuration = { minutes: 30 };   // Break duration is 30 minutes
 let scheduledInterviews = scheduleInterviews(candidateData.map(user => user.UserId), startTime, endTime, interviewDuration, breakDuration);
 scheduledInterviews.forEach(interview => console.log(interview));
 
-export default scheduleInterviews;
+// export default scheduleInterviews;

@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const SchedulerForm = () => {
-    // State variables to store form data and scheduled interviews
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [interviewDuration, setInterviewDuration] = useState(2);
     const [breakDuration, setBreakDuration] = useState(30);
     const [scheduledInterviews, setScheduledInterviews] = useState([]);
 
-    const navigate = useNavigate(); // Initialize the useNavigate hook
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state && location.state.csvData) {
+            // Retrieve CSV data from location state
+            const csvData = location.state.csvData;
+            // Process CSV data as needed
+            console.log('CSV Data:', csvData);
+        }
+    }, [location.state]);
 
     // Function to handle scheduling interviews
     const handleScheduleInterviews = () => {
@@ -40,9 +48,6 @@ const SchedulerForm = () => {
 
         // Update scheduled interviews state
         setScheduledInterviews(interviews);
-
-        // Navigate to the scheduled interviews page
-        navigate('/scheduled-interviews'); // Replace '/scheduled-interviews' with your desired route
     };
 
     // Function to format time as HH:MM
@@ -123,9 +128,16 @@ const SchedulerForm = () => {
                 </form>
             </main>
             <div id="scheduledInterviews" className="max-w-4xl mx-auto p-6">
-                {scheduledInterviews.map((interview, index) => (
-                    <p key={index}>{JSON.stringify(interview)}</p>
-                ))}
+                <h2 className="text-2xl font-bold mb-4">Scheduled Interviews</h2>
+                <ul>
+                    {scheduledInterviews.map((interview, index) => (
+                        <li key={index}>
+                            <strong>Date:</strong> {interview.date}<br />
+                            <strong>Start Time:</strong> {interview.start_time}<br />
+                            <strong>End Time:</strong> {interview.end_time}
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );
