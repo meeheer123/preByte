@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import scheduleInterviews from './scheduleInterviews'; // Import your scheduling function
 
 const SchedulerForm = () => {
     const [startTime, setStartTime] = useState('');
@@ -7,7 +8,6 @@ const SchedulerForm = () => {
     const [interviewDuration, setInterviewDuration] = useState(2);
     const [breakDuration, setBreakDuration] = useState(30);
     const [scheduledInterviews, setScheduledInterviews] = useState([]);
-
     const location = useLocation();
 
     useEffect(() => {
@@ -15,9 +15,14 @@ const SchedulerForm = () => {
             // Retrieve CSV data from location state
             const csvData = location.state.csvData;
             // Process CSV data as needed
-            console.log('CSV Data:', csvData);
+            // console.log('CSV Data:', csvData);
+
+            // Call the scheduling function here
+            const scheduledData = scheduleInterviews(csvData, startTime, endTime, interviewDuration, breakDuration);
+            console.log('Scheduled Interviews:', scheduledData);
+            setScheduledInterviews(scheduledData);
         }
-    }, [location.state]);
+    }, [location.state, startTime, endTime, interviewDuration, breakDuration]);
 
     // Function to handle scheduling interviews
     const handleScheduleInterviews = () => {
