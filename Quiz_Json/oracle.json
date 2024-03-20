@@ -1,0 +1,125 @@
+{
+    "questions": [
+      {
+        "number": 1,
+        "category": "JavaScript",
+        "question": "What does DOM stand for in JavaScript?",
+        "options": {
+          "a": "Document Object Model",
+          "b": "Data Object Model",
+          "c": "Display Object Model",
+          "d": "Dynamic Object Model"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 2,
+        "category": "JavaScript",
+        "question": "Which keyword is used to declare variables in JavaScript?",
+        "options": {
+          "a": "var",
+          "b": "int",
+          "c": "string",
+          "d": "variable"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 3,
+        "category": "JavaScript",
+        "question": "Which event occurs when the user clicks on an HTML element?",
+        "options": {
+          "a": "onmouseover",
+          "b": "onchange",
+          "c": "onclick",
+          "d": "onkeydown"
+        },
+        "correctOption": "c"
+      },
+      {
+        "number": 4,
+        "category": "JavaScript",
+        "question": "What does the typeof operator return in JavaScript?",
+        "options": {
+          "a": "The data type of a variable",
+          "b": "The value of a variable",
+          "c": "The size of a variable",
+          "d": "The memory address of a variable"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 5,
+        "category": "JavaScript",
+        "question": "Which method is used to add a new item to the end of an array in JavaScript?",
+        "options": {
+          "a": "push()",
+          "b": "append()",
+          "c": "addToEnd()",
+          "d": "insert()"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 6,
+        "category": "JavaScript",
+        "question": "Which operator is used for string concatenation in JavaScript?",
+        "options": {
+          "a": "+",
+          "b": "&",
+          "c": "*",
+          "d": "|"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 7,
+        "category": "JavaScript",
+        "question": "Which method is used to remove the last item from an array in JavaScript?",
+        "options": {
+          "a": "pop()",
+          "b": "removeLast()",
+          "c": "deleteLast()",
+          "d": "splice()"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 8,
+        "category": "JavaScript",
+        "question": "Which function is used to convert a string to a number in JavaScript?",
+        "options": {
+          "a": "toInt()",
+          "b": "parseNumber()",
+          "c": "Number()",
+          "d": "stringToNumber()"
+        },
+        "correctOption": "c"
+      },
+      {
+        "number": 9,
+        "category": "JavaScript",
+        "question": "Which statement is used to stop the execution of a function in JavaScript?",
+        "options": {
+          "a": "break",
+          "b": "return",
+          "c": "exit",
+          "d": "stop"
+        },
+        "correctOption": "b"
+      },
+      {
+        "number": 10,
+        "category": "JavaScript",
+        "question": "What is the output of typeof null in JavaScript?",
+        "options": {
+          "a": "object",
+          "b": "null",
+          "c": "undefined",
+          "d": "string"
+        },
+        "correctOption": "a"
+      }
+    ]
+  }
+  

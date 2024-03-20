@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Papa from 'papaparse';
 import { Button } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
+import EmailSender from './EmailSender';
 
 const CSVReader = () => {
   const [csvData, setCsvData] = useState([]);
@@ -39,6 +40,25 @@ const CSVReader = () => {
     setImageUploadProgress(true);
   };
 
+
+  //demo data in the formate of array
+  const users = [
+    {
+      name: "Harshad Karale",
+      email: "harshad.karale22@pccoepune.org",
+      date: "2024-03-20",
+      startTime: "09:00 AM",
+      endTime: "11:00 AM"
+    },
+    {
+      name: "Harshad",
+      email: "harshadkarale25@gmail.com",
+      date: "2024-03-21",
+      startTime: "10:00 AM",
+      endTime: "12:00 PM"
+    },
+  ];
+
   return (
     <div>
       <input type="file" accept=".csv" onChange={handleFileChange} multiple />
@@ -70,6 +90,11 @@ const CSVReader = () => {
           ))}
         </tbody>
       </table>
+
+      <div>
+      <EmailSender users={users} />
+    </div>
+
     </div>
   );
 };

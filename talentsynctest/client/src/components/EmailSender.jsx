@@ -1,31 +1,53 @@
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 
-export const EmailSender = () => {
-  const form = useRef();
+const EmailSender = ({ users }) => {
+  const [emailsSent, setEmailsSent] = useState(false);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  emailjs.init("7hvsQsv2TgE5TSV2H");
 
-    emailjs
-      .sendForm('service_722qmcv', 'template_ff9k7ul', form.current, {
-        publicKey: 'YOUR_PUBLIC_KEY',
+  const onHelpButtonClick = () => {
+    users.forEach(user => {
+      const { name, email, date, startTime, endTime } = user;
+
+      const params = {
+        name: name,
+        email: email,
+        date: date,
+        start_time: startTime,
+        end_time: endTime
+      };
+
+      const serviceID = "service_ain75vc"; // Replace with your email service ID
+      const templateID = "template_vwujnwa"; // Replace with your email template ID
+
+      emailjs.send(serviceID, templateID, params)
+      .then((res) => {
+        console.log(res);
+        // Optionally, do something after sending each email
       })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
-      );
+      .catch((err) => console.log(err));
+    });
+
+    setEmailsSent(true); // Set emailsSent to true after all emails are sent
+    // Optionally, you can do other actions after sending all emails here
   };
 
+  if (emailsSent) {
+    alert("Your messages have been sent successfully to all candidates!!");
+    location.reload(); // Refresh the page after sending all emails
+  }
+
   return (
-    <form ref={form} onSubmit={sendEmail}>
-      <label>Name</label>
-      <input type="text" name="from_name" />
-      <input type="submit" value="Send" />
-    </form>
+    <button
+      type="button"
+      onClick={onHelpButtonClick}
+      className="w-full bg-gradient-to-br from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 text-white py-2 px-4 rounded-md"
+    >
+      Send Mails
+    </button>
+
   );
 };
+
+export default EmailSender;

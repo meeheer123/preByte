@@ -1,0 +1,125 @@
+{
+    "questions": [
+      {
+        "number": 1,
+        "category": "Python",
+        "question": "Which of the following is a correct way to comment multiple lines in Python?",
+        "options": {
+          "a": "# This is a comment",
+          "b": "/* This is a comment */",
+          "c": "''' This is a comment '''",
+          "d": "// This is a comment"
+        },
+        "correctOption": "c"
+      },
+      {
+        "number": 2,
+        "category": "Python",
+        "question": "Which statement is used to exit a loop in Python?",
+        "options": {
+          "a": "break",
+          "b": "exit",
+          "c": "return",
+          "d": "continue"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 3,
+        "category": "Python",
+        "question": "Which method is used to get the length of a string in Python?",
+        "options": {
+          "a": "length()",
+          "b": "len()",
+          "c": "size()",
+          "d": "count()"
+        },
+        "correctOption": "b"
+      },
+      {
+        "number": 4,
+        "category": "Python",
+        "question": "Which statement is used to define a function in Python?",
+        "options": {
+          "a": "def",
+          "b": "function",
+          "c": "define",
+          "d": "func"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 5,
+        "category": "Python",
+        "question": "Which of the following is NOT a valid variable name in Python?",
+        "options": {
+          "a": "my_variable",
+          "b": "myVariable",
+          "c": "1variable",
+          "d": "_variable"
+        },
+        "correctOption": "c"
+      },
+      {
+        "number": 6,
+        "category": "Python",
+        "question": "Which method is used to convert a string to uppercase in Python?",
+        "options": {
+          "a": "uppercase()",
+          "b": "toUpper()",
+          "c": "upper()",
+          "d": "toUpperCase()"
+        },
+        "correctOption": "c"
+      },
+      {
+        "number": 7,
+        "category": "Python",
+        "question": "Which data type is used to store a sequence of characters in Python?",
+        "options": {
+          "a": "int",
+          "b": "float",
+          "c": "str",
+          "d": "char"
+        },
+        "correctOption": "c"
+      },
+      {
+        "number": 8,
+        "category": "Python",
+        "question": "Which statement is used to open a file in Python?",
+        "options": {
+          "a": "openFile()",
+          "b": "open()",
+          "c": "fileOpen()",
+          "d": "file()"
+        },
+        "correctOption": "b"
+      },
+      {
+        "number": 9,
+        "category": "Python",
+        "question": "Which method is used to add an item to a set in Python?",
+        "options": {
+          "a": "add()",
+          "b": "insert()",
+          "c": "append()",
+          "d": "update()"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 10,
+        "category": "Python",
+        "question": "Which statement is used to remove an item from a list in Python?",
+        "options": {
+          "a": "remove()",
+          "b": "delete()",
+          "c": "pop()",
+          "d": "erase()"
+        },
+        "correctOption": "a"
+      }
+    ]
+  }
+  

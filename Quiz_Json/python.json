@@ -1,0 +1,125 @@
+{
+    "questions": [
+      {
+        "number": 1,
+        "category": "Oracle",
+        "question": "What does SQL stand for?",
+        "options": {
+          "a": "Structured Query Language",
+          "b": "Sequential Query Language",
+          "c": "Structured Question Language",
+          "d": "Sequential Question Language"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 2,
+        "category": "Oracle",
+        "question": "Which keyword is used to retrieve a unique row from a table in Oracle?",
+        "options": {
+          "a": "UNIQUE",
+          "b": "DISTINCT",
+          "c": "UNION",
+          "d": "SELECT UNIQUE"
+        },
+        "correctOption": "b"
+      },
+      {
+        "number": 3,
+        "category": "Oracle",
+        "question": "Which operator is used for pattern matching in Oracle SQL?",
+        "options": {
+          "a": "LIKE",
+          "b": "MATCH",
+          "c": "CONTAINS",
+          "d": "PATTERN"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 4,
+        "category": "Oracle",
+        "question": "What does the NVL function do in Oracle?",
+        "options": {
+          "a": "Returns the first non-null expression in a list",
+          "b": "Returns the first null expression in a list",
+          "c": "Returns the concatenation of two strings",
+          "d": "Returns the length of a string"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 5,
+        "category": "Oracle",
+        "question": "Which statement is used to delete a table in Oracle?",
+        "options": {
+          "a": "DROP TABLE",
+          "b": "DELETE TABLE",
+          "c": "REMOVE TABLE",
+          "d": "REMOVE FROM"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 6,
+        "category": "Oracle",
+        "question": "Which function is used to return the current date and time in Oracle?",
+        "options": {
+          "a": "GETDATE()",
+          "b": "CURRENT_TIMESTAMP",
+          "c": "NOW()",
+          "d": "SYSDATE"
+        },
+        "correctOption": "d"
+      },
+      {
+        "number": 7,
+        "category": "Oracle",
+        "question": "Which statement is used to add a new column to an existing table in Oracle?",
+        "options": {
+          "a": "ALTER COLUMN",
+          "b": "ADD COLUMN",
+          "c": "INSERT COLUMN",
+          "d": "MODIFY COLUMN"
+        },
+        "correctOption": "b"
+      },
+      {
+        "number": 8,
+        "category": "Oracle",
+        "question": "Which statement is used to change the data type of a column in Oracle?",
+        "options": {
+          "a": "ALTER COLUMN",
+          "b": "MODIFY COLUMN",
+          "c": "CHANGE COLUMN",
+          "d": "UPDATE COLUMN"
+        },
+        "correctOption": "b"
+      },
+      {
+        "number": 9,
+        "category": "Oracle",
+        "question": "Which statement is used to create a new table in Oracle?",
+        "options": {
+          "a": "CREATE TABLE",
+          "b": "MAKE TABLE",
+          "c": "ADD TABLE",
+          "d": "INSERT TABLE"
+        },
+        "correctOption": "a"
+      },
+      {
+        "number": 10,
+        "category": "Oracle",
+        "question": "Which function is used to find the maximum value in a column in Oracle?",
+        "options": {
+          "a": "MAX()",
+          "b": "MIN()",
+          "c": "SUM()",
+          "d": "AVG()"
+        },
+        "correctOption": "a"
+      }
+    ]
+  }
+  
