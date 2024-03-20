@@ -1,4 +1,3 @@
-// CSVReader.js
 import React, { useState } from 'react';
 import Papa from 'papaparse';
 import { Button } from 'flowbite-react';
@@ -8,15 +7,7 @@ import EmailSender from './EmailSender';
 const CSVReader = () => {
   const [csvData, setCsvData] = useState([]);
   const [imageUploadProgress, setImageUploadProgress] = useState(false);
-
-
-  //for handling the button change click
   const navigate = useNavigate();
-
-  const handleScheduleInterviews = () => {
-      navigate('/schedule-interview');
-  };
-
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -33,11 +24,8 @@ const CSVReader = () => {
     });
   };
 
-  const handleUploadImage = () => {
-    // Logic to handle image upload goes here
-    console.log("Image uploaded!");
-    // Assuming you want to set imageUploadProgress to true while uploading
-    setImageUploadProgress(true);
+  const handleScheduleInterviews = () => {
+    navigate('/schedule-interview', { state: { csvData: csvData } });
   };
 
 
@@ -63,14 +51,14 @@ const CSVReader = () => {
     <div>
       <input type="file" accept=".csv" onChange={handleFileChange} multiple />
       <Button
-            type='button'
-            gradientDuoTone='purpleToBlue'
-            size='sm'
-            outline
-            onClick={handleScheduleInterviews}
-        >
-            Schedule Interviews
-        </Button>
+        type='button'
+        gradientDuoTone='purpleToBlue'
+        size='sm'
+        outline
+        onClick={handleScheduleInterviews}
+      >
+        Schedule Interviews
+      </Button>
       <table>
         <thead>
           <tr>

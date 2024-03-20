@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const SchedulerForm = () => {
-    // State variables to store form data and scheduled interviews
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [interviewDuration, setInterviewDuration] = useState(2);
     const [breakDuration, setBreakDuration] = useState(30);
     const [scheduledInterviews, setScheduledInterviews] = useState([]);
+    const [csvData, setCsvData] = useState([]);
+    const location = useLocation();
 
-    const navigate = useNavigate(); // Initialize the useNavigate hook
+    useEffect(() => {
+        if (location.state && location.state.csvData) {
+            // Retrieve CSV data from location state
+            const csvData = location.state.csvData;
+            setCsvData(csvData);
+        }
+    }, [location.state]);
 
     // Function to handle scheduling interviews
     const handleScheduleInterviews = () => {
@@ -19,30 +27,33 @@ const SchedulerForm = () => {
         startDate.setHours(parseInt(startTime.split(':')[0]), parseInt(startTime.split(':')[1]), 0, 0);
         endDate.setHours(parseInt(endTime.split(':')[0]), parseInt(endTime.split(':')[1]), 0, 0);
 
-        // Schedule interviews
-        const interviews = [];
-        let currentDate = new Date(startDate);
-        while (currentDate < endDate) {
-            // Calculate interview end time
-            const endDateTime = new Date(currentDate.getTime() + interviewDuration * 60 * 1000);
-            endDateTime.setSeconds(0, 0);
+        console.log(csvData);
+    
+        // Prepare request body
+        const requestData = {
+            candidates: csvData, // Fill this with your candidates data
+            start_time: startTime,
+            end_time: endTime,
+            interview_duration: interviewDuration,
+            break_time: breakDuration
+        };
+    
+        // Make POST request to the API
+        const handleScheduleInterviews = async () => {
+            try {
+                const response = await axios.post('http://127.0.0.1:5000/schedule-interviews', requestData);
+                if (response.status !== 200) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = response.data;
+                setScheduledInterviews(data.scheduled_interviews);
+                console.log('Scheduled Interviews:', data.scheduled_interviews);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        };
 
-            // Add scheduled interview to the list
-            interviews.push({
-                date: currentDate.toDateString(),
-                start_time: formatTime(currentDate),
-                end_time: formatTime(endDateTime)
-            });
-
-            // Move to the next available slot
-            currentDate = new Date(currentDate.getTime() + (interviewDuration + breakDuration) * 60 * 1000);
-        }
-
-        // Update scheduled interviews state
-        setScheduledInterviews(interviews);
-
-        // Navigate to the scheduled interviews page
-        navigate('/scheduled-interviews'); // Replace '/scheduled-interviews' with your desired route
+        handleScheduleInterviews(); // Call the function to initiate the POST request
     };
 
     // Function to format time as HH:MM
@@ -123,9 +134,16 @@ const SchedulerForm = () => {
                 </form>
             </main>
             <div id="scheduledInterviews" className="max-w-4xl mx-auto p-6">
-                {scheduledInterviews.map((interview, index) => (
-                    <p key={index}>{JSON.stringify(interview)}</p>
-                ))}
+                <h2 className="text-2xl font-bold mb-4">Scheduled Interviews</h2>
+                <ul>
+                    {scheduledInterviews.map((interview, index) => (
+                        <li key={index}>
+                            <strong>Date:</strong> {interview.date}<br />
+                            <strong>Start Time:</strong> {interview.start_time}<br />
+                            <strong>End Time:</strong> {interview.end_time}
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );
