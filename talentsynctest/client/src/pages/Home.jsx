@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
-import CallToAction from "../components/CallToAction";
 import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import TypingEffect from "../components/TypingEffect";
+import { Modal } from 'flowbite-react';
+import Quiz from "../components/quiz";
 
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,6 +18,7 @@ export default function Home() {
     };
     fetchPosts();
   }, []);
+
   return (
     <div className="w-full">
       <div className="flex flex-col gap-9 p-28 px-3 max-w-6xl mx-auto ">
@@ -34,14 +37,14 @@ export default function Home() {
           <TypingEffect/>
         </h2>
         <p className="text-gray-500 text-2xl  sm:text-xl">
-        TalentSync Hub is a cutting-edge platform seamlessly blending video conferencing with real-time collaborative coding, revolutionizing the interview process. Connect with top talent, conduct dynamic interviews, and evaluate coding skills—all in one place.
+          TalentSync Hub is a cutting-edge platform seamlessly blending video conferencing with real-time collaborative coding, revolutionizing the interview process. Connect with top talent, conduct dynamic interviews, and evaluate coding skills—all in one place.
         </p>
-        <Link
+        {/* <Link
           to="/search"
           className="text-lg sm:text-xl text-teal-500 hover:underline"
         >
           View all posts
-        </Link>
+        </Link> */}
       </div>
 
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
@@ -53,14 +56,38 @@ export default function Home() {
                 <PostCard key={post._id} post={post} />
               ))}
             </div>
-            <Link
+            {/* <Link
               to={"/search"}
               className="text-xl text-teal-500 hover:underline text-center"
             >
               View all posts
-            </Link>
+            </Link> */}
           </div>
         )}
+
+        {/* Button to open the modal */}
+        <button
+          type="button"
+          onClick={() => setShowModal(true)}
+          className="w-full bg-gradient-to-br from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 text-white py-2 px-4 rounded-md"
+        >
+          Open Quiz
+        </button>
+
+        {/* Modal containing the Quiz component */}
+        <Modal
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          popup
+          size="md"
+        >
+          <Modal.Header>
+            Quiz
+          </Modal.Header>
+          <Modal.Body>
+            <Quiz/>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

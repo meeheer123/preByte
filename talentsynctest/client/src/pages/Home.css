@@ -1,0 +1,16 @@
+.button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom right, #ff007f, #ff7f00);
+  }
+  
+  .button:hover {
+    background-image: linear-gradient(to bottom right, #ff0055, #ff6a00);
+  }
+  

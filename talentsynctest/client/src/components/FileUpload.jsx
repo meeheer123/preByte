@@ -22,6 +22,7 @@ const CSVReader = () => {
       });
     });
   };
+  
 
   const handleScheduleInterviews = () => {
     navigate('/schedule-interview', { state: { csvData: csvData } });
