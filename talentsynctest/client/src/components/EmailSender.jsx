@@ -8,15 +8,16 @@ const EmailSender = ({ users }) => {
 
   const onHelpButtonClick = () => {
     users.forEach(user => {
-      const { name, email, date, startTime, endTime } = user;
+      const { name, email, date, start_time, end_time } = user;
 
       const params = {
         name: name,
         email: email,
         date: date,
-        start_time: startTime,
-        end_time: endTime
+        start_time: start_time,
+        end_time: end_time
       };
+      console.log(params);
 
       const serviceID = "service_ain75vc"; // Replace with your email service ID
       const templateID = "template_vwujnwa"; // Replace with your email template ID
@@ -30,7 +31,6 @@ const EmailSender = ({ users }) => {
     });
 
     setEmailsSent(true); // Set emailsSent to true after all emails are sent
-    // Optionally, you can do other actions after sending all emails here
   };
 
   if (emailsSent) {

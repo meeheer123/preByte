@@ -16,6 +16,7 @@ import PostPage from './pages/PostPage';
 import ScrollToTop from './components/ScrollToTop';
 import Search from './pages/Search';
 import SchedulerForm from './pages/SchedulerPage';
+import Confirmation from './components/Confirmation';
 
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
             <Route path='/create-post' element={<CreatePost />} />
             <Route path='/update-post/:postId' element={<UpdatePost />} />
             <Route path='/schedule-interview' element={<SchedulerForm/>} />
+            <Route path='/confirmation' element={<Confirmation/>} />
           </Route>
           <Route path='/projects' element={<Projects />} />
           <Route path='/post/:postSlug' element={<PostPage />} />
